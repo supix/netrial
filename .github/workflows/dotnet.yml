@@ -28,5 +28,6 @@ jobs:
       - name: build image
         run: docker build ./docker/ -t supix/ghactiontrial:latest
       - name: publish image to docker hub
-        run:
+        run: |
+          docker login -u supix -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push supix/ghactiontrial:latest
