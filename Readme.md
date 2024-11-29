@@ -1,0 +1,3 @@
+# netrial
+
+Studying GitHub actions
