@@ -22,11 +22,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build --no-restore
-      # - name: Test
-      #  run: dotnet test --no-build --verbosity normal
+        run: |
+          dotnet build --no-restore
+          dotnet publish -c Release
       - name: build image
-        run: docker build ./docker/ -t supix/ghactiontrial:latest
+        run: docker build . -t supix/ghactiontrial:latest
       - name: publish image to docker hub
         run: |
           docker login -u supix -p ${{ secrets.DOCKER_HUB_TOKEN }}
