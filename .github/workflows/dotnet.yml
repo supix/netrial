@@ -28,7 +28,7 @@ jobs:
       - name: Build docker image
         run: |
           ls -l
-          docker build . -t supix/ghactiontrial:latest -d ./backend/docker/Dockerfile
+          docker build . -t supix/ghactiontrial:latest -f ./backend/docker/Dockerfile
       - name: Publish docker image to Docker hub
         run: |
           docker login -u supix -p ${{ secrets.DOCKER_HUB_TOKEN }}
