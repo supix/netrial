@@ -20,11 +20,11 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore dependencies
-        run: dotnet restore --artifacts-path ./backend/src/
+        run: dotnet restore ./backend/src/
       - name: Build & publish
         run: |
-          dotnet build --no-restore --artifacts-path ./backend/src/
-          dotnet publish -c Release --artifacts-path ./backend/src/
+          dotnet build --no-restore ./backend/src/
+          dotnet publish -c Release ./backend/src/
       - name: Build docker image
         run: docker build ./backend/docker -t supix/ghactiontrial:latest
       - name: Publish docker image to Docker hub
