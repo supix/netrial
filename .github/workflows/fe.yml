@@ -3,10 +3,10 @@ name: Build and publish frontend image to docker hub
 on:
   push:
     branches: [ "main" ]
-    paths: ./frontend/src
+    paths: frontend/src
   pull_request:
     branches: [ "main" ]
-    paths: ./frontend/src
+    paths: frontend/src
 
 jobs:
   publish_images:

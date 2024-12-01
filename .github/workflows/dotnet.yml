@@ -6,10 +6,10 @@ name: Build and publish backend image to docker hub
 on:
   push:
     branches: [ "main" ]
-    paths: ./backend/src
+    paths: backend/src
   pull_request:
     branches: [ "main" ]
-    paths: ./backend/src
+    paths: backend/src
 
 jobs:
   publish_images:
