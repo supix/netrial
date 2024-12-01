@@ -1,13 +1,12 @@
 name: Build and publish frontend image to docker hub
 
 on:
-  [workflow_dispatch]
-  #push:
-  #  branches: [ "main" ]
-  #  paths: ./frontend/src
-  #pull_request:
-  #  branches: [ "main" ]
-  #  paths: ./frontend/src
+  push:
+    branches: [ "main" ]
+    paths: ./frontend/src
+  pull_request:
+    branches: [ "main" ]
+    paths: ./frontend/src
 
 jobs:
   publish_images:
