@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22.x
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build --configuration=production
+      - run: npm ci --prefix frontend/src
+      - run: npm run build --configuration=production  --prefix frontend/src
       - name: Build docker image
         run: docker build . -t supix/netrial_fe:latest -f ./frontend/docker/Dockerfile
       - name: Publish docker image to Docker hub
