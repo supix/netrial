@@ -1,0 +1,30 @@
+name: Build and publish frontend image to docker hub
+
+on:
+  [workflow_dispatch]
+  #push:
+  #  branches: [ "main" ]
+  #  paths: ./frontend/src
+  #pull_request:
+  #  branches: [ "main" ]
+  #  paths: ./frontend/src
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --configuration=production
+      - name: Build docker image
+        run: docker build . -t supix/netrial_fe:latest -f ./frontend/docker/Dockerfile
+      - name: Publish docker image to Docker hub
+        run: |
+          docker login -u supix -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push supix/netrial_fe:latest
