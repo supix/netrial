@@ -26,9 +26,7 @@ jobs:
           dotnet build --no-restore ./backend/src/
           dotnet publish -c Release ./backend/src/
       - name: Build docker image
-        run: |
-          ls -l
-          docker build . -t supix/ghactiontrial:latest -f ./backend/docker/Dockerfile
+        run: docker build . -t supix/ghactiontrial:latest -f ./backend/docker/Dockerfile
       - name: Publish docker image to Docker hub
         run: |
           docker login -u supix -p ${{ secrets.DOCKER_HUB_TOKEN }}
