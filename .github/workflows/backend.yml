@@ -4,14 +4,15 @@
 name: Backend deploy
 
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'backend/src/**'
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - 'backend/src/**'
+  [workflow_dispatch]
+  # push:
+  #   branches: [ "main" ]
+  #   paths:
+  #     - 'backend/src/**'
+  # pull_request:
+  #   branches: [ "main" ]
+  #   paths:
+  #     - 'backend/src/**'
 
 jobs:
   publish_images:
@@ -38,10 +39,12 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         with:
+          SCRIPT_BEFORE: |
+            echo ${{ secrets.ESC_PWD }} | sudo su -
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "backend/docker/"
+          ARGS: "-rlgoDzvc -i"
+          SOURCE: "frontend/docker/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          # TARGET: ${{ secrets.REMOTE_TARGET }}
+          TARGET: "/tmp"
           # EXCLUDE: "/dist/, /node_modules/"
