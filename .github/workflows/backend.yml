@@ -40,7 +40,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         with:
           SCRIPT_BEFORE: |
-            echo ${{ secrets.ESC_PWD }} | sudo su -
+            echo ${{ secrets.ESC_PWD }} | sudo -S su -
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i"
           SOURCE: "frontend/docker/"
